@@ -1,0 +1,162 @@
+/*DEF_CMD(-1, ERROR, 0, {return 0;})*/
+
+DEF_CMD(0, HLT, 0, break;)
+
+DEF_CMD(1, PUSH, 1,
+
+        elem_t value = inm_value;
+        if (bit_field.reg == 1)
+        {
+                value += proc->Regs[reg_value];
+        }
+        if (bit_field.ram == 1)
+        {
+                stack_push (stack, proc->Ram [value]);
+        }
+        else 
+        {
+                stack_push (stack, value);
+        })
+
+DEF_CMD(2, POP, 1,
+        elem_t value = inm_value;
+        elem_t stack_value = 0;
+        if (bit_field.reg == 1)
+        {
+                value += proc->Regs[reg_value];
+        }
+        if (bit_field.ram == 1)
+        {
+                stack_pop (stack, &stack_value);
+                proc->Ram [value] = stack_value;
+        }
+        else 
+        {
+                stack_pop (stack, &stack_value);
+                proc->Regs[reg_value] = stack_value;
+        })
+
+//push rax
+//push 2
+//add
+
+//push rax + 2
+
+/*DEF_CMD(3, POPARG, 1,
+        elem_t input_value = 0;
+        stack_pop (stack, &input_value);
+        Regs[*(array + amount + 1) - 10] = input_value;
+        amount += 2;)*/
+
+DEF_CMD(3, ADD, 0,
+        elem_t fr_var = 0;
+        elem_t sec_var = 0;
+        stack_pop (stack, &fr_var);
+        stack_pop (stack, &sec_var);
+
+        stack_push (stack, fr_var + sec_var);
+        )
+
+DEF_CMD(4, SUB, 0,
+        elem_t fr_var = 0;
+        elem_t sec_var = 0;
+        stack_pop (stack, &fr_var);
+        stack_pop (stack, &sec_var);
+
+        stack_push (stack, fr_var - sec_var);
+        )
+
+DEF_CMD(5, MUL, 0,
+        elem_t fr_var = 0;
+        elem_t sec_var = 0;
+        stack_pop (stack, &fr_var);
+        stack_pop (stack, &sec_var);
+
+        stack_push (stack, fr_var * sec_var);
+        )
+
+DEF_CMD(6, DIV, 0,
+        elem_t fr_var = 0;
+        elem_t sec_var = 0;
+        stack_pop (stack, &fr_var);
+        stack_pop (stack, &sec_var);
+
+        stack_push (stack, fr_var / sec_var); 
+        )
+
+DEF_CMD(7, OUT, 0,
+        printf ("%d\n", stack_top (stack));
+        )
+
+DEF_CMD(8, IN, 0,
+        elem_t input_value = 0;
+        printf ("WRITE VALUE : ");
+        scanf ("%d", &input_value);
+        stack_push (stack, input_value);
+        )
+
+DEF_CMD(9, JA, 1,
+        elem_t fr_var = 0;
+        elem_t sec_var = 0;
+        stack_pop (stack, &fr_var);
+        stack_pop (stack, &sec_var);
+        if (fr_var > sec_var)
+        {
+                proc->Ip = inm_value;
+        }
+        )
+
+DEF_CMD(10, JAL, 1,
+        elem_t fr_var = 0;
+        elem_t sec_var = 0;
+        stack_pop (stack, &fr_var);
+        stack_pop (stack, &sec_var);
+        if (fr_var >= sec_var)
+        {
+                proc->Ip = inm_value;
+        }
+        )
+
+DEF_CMD(11, JB, 1,
+        elem_t fr_var = 0;
+        elem_t sec_var = 0;
+        stack_pop (stack, &fr_var);
+        stack_pop (stack, &sec_var);
+        if (fr_var < sec_var)
+        {
+                proc->Ip = inm_value;
+        }
+        )
+
+DEF_CMD(12, JBL, 1,
+        elem_t fr_var = 0;
+        elem_t sec_var = 0;
+        stack_pop (stack, &fr_var);
+        stack_pop (stack, &sec_var);
+        if (fr_var <= sec_var)
+        {
+                proc->Ip = inm_value;
+        }
+        )
+
+DEF_CMD(13, JE, 1,
+        elem_t fr_var = 0;
+        elem_t sec_var = 0;
+        stack_pop (stack, &fr_var);
+        stack_pop (stack, &sec_var);
+        if (fr_var == sec_var)
+        {
+                proc->Ip = inm_value;
+        }
+        )
+
+DEF_CMD(14, JNE, 1,
+        elem_t fr_var = 0;
+        elem_t sec_var = 0;
+        stack_pop (stack, &fr_var);
+        stack_pop (stack, &sec_var);
+        if (fr_var != sec_var)
+        {
+                proc->Ip = inm_value;
+        }
+        )
