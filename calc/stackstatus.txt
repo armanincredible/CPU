@@ -1,0 +1,19 @@
+Stack have SECOND_LEVEL Protect (it means that hash and canary works)
+
+Stack <PK5Stack> Have NO_ERRORS at calc_main.cpp at (main:23) 
+
+Capacity = 8
+Size = 2
+Pointer of data <d> = 0000000000B313E8
+
+hash = 3080895597
+left_canary_stack = 666999.000000
+right_canary_stack = 666999.000000
+left_canary_data = 0000000000B313E0
+right_canary_data = 0000000000B313F8
+
+	data[0] = 0.000000 
+	data[1] = 0.000000 
+
+END OF TXT
+ 			\Thanks for using our program\
