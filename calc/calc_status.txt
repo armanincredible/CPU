@@ -1,0 +1,8 @@
+ram_status = 0, reg_status = 0, inm_status 0, cmd = 21
+IP 1, REG_VALUE 0, INM_VALUE 0
+
+
+ram_status = 0, reg_status = 0, inm_status 0, cmd = 0
+IP 2, REG_VALUE 0, INM_VALUE 0
+
+
