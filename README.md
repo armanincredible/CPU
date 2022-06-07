@@ -20,7 +20,8 @@ DEF_CMD(5, MUL, _parsing_default,
         stack_pop (stack, &sec_var);
 
         stack_push (stack, (elem_t) (fr_var * sec_var));
-        )```
+        )
+```
         
 ## Assembler
 My assembler has registers, and a stack, as well as virtual memory.  <br/> 
